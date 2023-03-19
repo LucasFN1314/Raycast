@@ -12,10 +12,10 @@ function createCanvas(identifier, classes = null) {
     resize();
 }
 
-function resize() {
+function resize(scale = 1) {
     let winSize = windowSize();
-    canvas.width = winSize.width;
-    canvas.height = winSize.height;
+    canvas.width = winSize.width * scale;
+    canvas.height = winSize.height * scale;
 
     halfwidth = winSize.width/2;
     halfHeight = winSize.height/2;
