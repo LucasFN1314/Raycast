@@ -1,7 +1,7 @@
 let fps, aps, fpsCounter = 0;
 
 let MS_POR_SEGUNDO = 1000;
-let APS_OBJETIVO = 60;
+let APS_OBJETIVO = 30;
 let MS_POR_ACTUALIZACION = MS_POR_SEGUNDO / APS_OBJETIVO;
 
 let ref_act = performance.now();
@@ -9,6 +9,11 @@ let ref_cont = performance.now();
 
 let tiempo_transcurrido = 0;
 let delta = 0;
+
+// || =============================================== || \\
+let raycast = new Raycast();
+
+let _update = [];
 
 function init() {
     fps = 0;
@@ -19,6 +24,8 @@ function init() {
     window.onresize = () => {
         resize();
     };
+
+    _update.push(raycast);
 
     setInterval(gameLoop, APS_OBJETIVO);
 }
@@ -46,11 +53,16 @@ function gameLoop() {
 }
 
 function update() {
+    for(const elem of _update)
+        elem.update();
     aps++;
 }
 
 function render() {
     clear();
+
+    for(const elem of _update)
+        elem.render();
 
     fps++;
     drawText({color: "white", x: 30, y: 30, font: '16px Monospace', text: `FPS: ${fpsCounter}`});
