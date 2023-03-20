@@ -13,7 +13,9 @@ let delta = 0;
 // || =============================================== || \\
 let raycast = new Raycast();
 
-let _update = [];
+let _update = [
+    raycast,
+];
 
 function init() {
     fps = 0;
@@ -25,7 +27,12 @@ function init() {
         resize();
     };
 
-    _update.push(raycast);
+    document.onkeydown = (event) => {
+        keys[event.keyCode] = true;
+    };
+    document.onkeyup = (event) => {
+        keys[event.keyCode] = false;
+    };
 
     setInterval(gameLoop, APS_OBJETIVO);
 }
