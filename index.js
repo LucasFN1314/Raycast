@@ -2,6 +2,7 @@ let fps, aps, fpsCounter = 0;
 
 let MS_POR_SEGUNDO = 1000;
 let APS_OBJETIVO = 30;
+let FPS_OBJETIVO = 60;
 let MS_POR_ACTUALIZACION = MS_POR_SEGUNDO / APS_OBJETIVO;
 
 let ref_act = performance.now();
@@ -34,7 +35,7 @@ function init() {
         keys[event.keyCode] = false;
     };
 
-    setInterval(gameLoop, APS_OBJETIVO);
+    setInterval(gameLoop, 1000/FPS_OBJETIVO);
 }
 
 function gameLoop() {
@@ -45,12 +46,12 @@ function gameLoop() {
 
     delta += tiempo_transcurrido / MS_POR_ACTUALIZACION;
 
+    render();
+
     while (delta>= 1) {
         update();
-        render();
         delta--;
     }
-
     if(performance.now() - ref_cont > MS_POR_SEGUNDO) {
         fpsCounter = fps;
         ref_cont = performance.now();
