@@ -1,9 +1,10 @@
 class Raycast {
     constructor() {
+        /*
         this.MAP_SIZE = 16;
         this.MAP_SCALE = 10; // || Escalado de cada punto del mapa
         this.MAP_SPEED = (this.MAP_SCALE / 2) / this.MAP_SCALE;
-        this.MAP_RANGE = this.MAP_SIZE * this.MAP_SCALE;
+        this.MAP_RANGE = this.MAP_SIZE * this.MAP_SCALE;*/
 
         this.MAP_X_OFFSET = 0;
         this.MAP_Y_OFFSET = 0;
@@ -13,33 +14,18 @@ class Raycast {
             1: '#555'
         };
 
-        this.MAP = [
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-            1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        ];
+        
 
         this.player = new Player({
-            x: this.MAP_SCALE *3 - this.MAP_SCALE/2 + .5, 
-            y: this.MAP_SCALE *10 + this.MAP_SCALE/2 + .5,
+            x: MAP_SCALE *3 - MAP_SCALE/2 + .5, 
+            y: MAP_SCALE *10 + MAP_SCALE/2 + .5,
             playerAngle: 0, 
             rotationSpeed: .1,
-            playerSpeed: this.MAP_SPEED * 2
+            playerSpeed: MAP_SPEED * 2
         });
         this.minimapPlayer = {x: this.MAP_X_OFFSET + this.player.x, y: this.MAP_Y_OFFSET + this.player.y};
+
+
     }
     render() {
         this.minimap();
@@ -51,28 +37,28 @@ class Raycast {
     }
 
     minimap() {
-        for (let row = 0; row < this.MAP_SIZE; row++) {
-            for (let col = 0; col < this.MAP_SIZE; col++) {
-                let tile = row * this.MAP_SIZE + col;
+        for (let row = 0; row < MAP_SIZE; row++) {
+            for (let col = 0; col < MAP_SIZE; col++) {
+                let tile = row * MAP_SIZE + col;
                 drawRect({
-                    color: this.tileColor(this.MAP[tile]),
-                    x: col * this.MAP_SCALE,
-                    y: row * this.MAP_SCALE,
-                    width: this.MAP_SCALE,
-                    height: this.MAP_SCALE
+                    color: this.tileColor(MAP[tile]),
+                    x: col * MAP_SCALE,
+                    y: row * MAP_SCALE,
+                    width: MAP_SCALE,
+                    height: MAP_SCALE
                 });
                 drawRect({
                     color: 'black',
-                    x: col * this.MAP_SCALE,
-                    y: row * this.MAP_SCALE,
+                    x: col * MAP_SCALE,
+                    y: row * MAP_SCALE,
                     width: 1,
-                    height: this.MAP_SCALE
+                    height: MAP_SCALE
                 });
                 drawRect({
                     color: 'black',
-                    x: col * this.MAP_SCALE,
-                    y: row * this.MAP_SCALE,
-                    width: this.MAP_SCALE,
+                    x: col * MAP_SCALE,
+                    y: row * MAP_SCALE,
+                    width: MAP_SCALE,
                     height: 1
                 });
             }
