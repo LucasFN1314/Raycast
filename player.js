@@ -11,6 +11,8 @@ class Player {
 
         this.xOffset = 0;
         this.yOffset = 0;
+
+        this.mapTarget = {x: 0, y: 0};
     }
     
     render() {
@@ -21,10 +23,10 @@ class Player {
         this.xOffset = Math.sin(this.playerAngle);
         this.yOffset = Math.cos(this.playerAngle);
 
+        this.collision();
         this.rotate();    
         this.move();
 
-        //console.log(keys); // 87w 83s
     }
 
     rotate() {
@@ -41,9 +43,16 @@ class Player {
         if(keys[87]) this.moveY = 1;
         if(keys[83]) this.moveY = -1;
         
-        this.y += this.yOffset * this.moveY * this.playerSpeed;
-        this.x += this.xOffset * this.moveY * this.playerSpeed;
+        if(this.moveY && MAP[this.mapTarget.y] == 0) {
+            this.y += this.yOffset * this.moveY * this.playerSpeed;
+        }
+        if(this.moveY && MAP[this.mapTarget.x] == 0) {
+            this.x += this.xOffset * this.moveY * this.playerSpeed;
+        }
     }
-
+    collision() {
+        this.mapTarget.x = Math.floor(this.y / MAP_SCALE) * MAP_SIZE + Math.floor((this.x + this.xOffset * this.moveY) / MAP_SCALE);
+        this.mapTarget.y = Math.floor((this.y + (this.yOffset * this.moveY)) / MAP_SCALE) * MAP_SIZE + Math.floor(this.x / MAP_SCALE);
+    }
 
 }
