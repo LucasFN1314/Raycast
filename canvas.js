@@ -26,7 +26,20 @@ function drawRect(properties) {
     context.fillRect(properties.x, properties.y, properties.width, properties.height);
 }
 
-function drawCircle() {
+function drawCircle(properties) {
+    context.fillStyle = properties.color;
+    context.beginPath();
+    context.arc(properties.x, properties.y, properties.radius, properties.startangle, properties.endangle);
+    context.fill();
+}
+
+function drawLine(properties) {
+    context.strokeStyle = properties.color;
+    context.lineWidth = properties.width;
+    context.beginPath();
+    context.moveTo(properties.moveToX, properties.moveToY);
+    context.lineTo(properties.lineToX, properties.lineToY);
+    context.stroke();
 
 }
 
